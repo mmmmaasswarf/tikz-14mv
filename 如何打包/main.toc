@@ -1,0 +1,23 @@
+\contentsline {section}{\numberline {1}介绍}{2}{section.1}%
+\contentsline {paragraph}{要求}{2}{section*.2}%
+\contentsline {paragraph}{术语}{2}{section*.3}%
+\contentsline {paragraph}{动机}{2}{section*.4}%
+\contentsline {section}{\numberline {2}\texttt {.ins} 文件}{3}{section.2}%
+\contentsline {section}{\numberline {3}\texttt {.dtx} 文件}{7}{section.3}%
+\contentsline {subsection}{\numberline {3.1}序言}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}用户文档}{14}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}代码和评论}{16}{subsection.3.3}%
+\contentsline {paragraph}{类文件}{21}{section*.5}%
+\contentsline {section}{\numberline {4}技巧、窍门和建议}{22}{section.4}%
+\contentsline {section}{\numberline {5}高级打包技术}{24}{section.5}%
+\contentsline {subsection}{\numberline {5.1}主文档文件}{24}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}单文件包发布}{25}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}具有共享版本信息的类和样式文件}{26}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}高级打包技术示例集}{27}{subsection.5.4}%
+\contentsline {section}{\numberline {A}框架文件}{27}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}用于生成 \texttt {.sty}文件的框架 \texttt {.ins}文件}{28}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}用于生成 \texttt {.cls}文件的 \texttt {.ins}框架文件}{29}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}用于生成 \texttt {.sty}文件的 \texttt {.dtx}框架文件}{31}{subsection.A.3}%
+\contentsline {subsection}{\numberline {A.4}用于生成 \texttt {.cls}文件的 \texttt {.dtx}框架文件}{34}{subsection.A.4}%
+\contentsline {subsection}{\numberline {A.5}主文档框架文件（ \texttt {.tex}）}{37}{subsection.A.5}%
+\contentsline {section}{参考文献}{38}{section*.6}%

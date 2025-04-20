@@ -1,0 +1,255 @@
+\documentclass{ctexart}
+\usepackage{tikz-14mv}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{fontspec}
+\usepackage{booktabs}
+
+
+\newfontfamily{\mvfont}{CopperplateCC-Heavy.otf}
+\hypersetup
+{
+    colorlinks = true,
+}
+\pagestyle{plain}
+\title{tikz-14mv宏包使用手册}
+\author{中指君}
+\date{2025/3/15\qquad v0.1}
+
+\xeCJKDeclareSubCJKBlock{angleBracket}{
+    "27E8 -> "27E9, %〈〉半角括号
+}
+\setCJKmainfont[angleBracket]{STIXTwoMath-Regular}
+\newcommand\codereplace[1]{%代码中的<可替换>部分
+    {\xeCJKsetup{CJKecglue={\hskip 0pt}}%
+    {\rm ⟨}\textsl{#1}{\rm ⟩}}}
+
+\newcommand\dmh[1]{%代码行
+    {\xeCJKsetup{CJKecglue={\hskip 0pt}}%
+    \vspace{0.5em}\noindent\raisebox{-3.5mm}[0pt][0pt]{\rule[1ex]{1mm}{5.5mm}}\quad \fontencoding{T1}\fontfamily{ccr}\fontseries{m}\fontshape{n}\selectfont #1\vspace{0.5em}
+    }}
+
+\newenvironment{dmd}{%代码段
+    \xeCJKsetup{CJKecglue={\hskip 0pt}}
+    \vspace{0.5em}
+    \ttfamily
+    \setlength{\parindent}{0pt}
+}{
+    \rmfamily
+    \vspace{0.5em}
+}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\pagebreak
+
+\section{简介}
+本宏包用于在\LaTeX 排版的文档中使用代码方便地绘制《14种扫雷变体》及其续作《14种扫雷变体2》中的题板,\emph{如果你是一位扫雷爱好者,且从来没有尝试过这款游戏,我强烈推荐你试试.}本宏包基于\texttt{tikz}宏包实现绘图功能,另外,\ \texttt{tikz-minesweeper}宏包给了我开发此宏包的灵感,并且给我提供了一些参考,\ \href{https://github.com/T0nyX1ang/tikz-minesweeper}{这是它的仓库链接}.
+
+\emph{在使用该宏包之前,请确保已经安装 {\mvfont CopperplateCC~Heavy}字体,原版游戏和本宏包中的题板中的文字都以该字体呈现.}
+
+需要注意的是,本宏包还处于未完成版本,还有很多在原版游戏中存在的功能没有实现,文中介绍的命令可能在后续版本中被改变.由于作者是\LaTeX 初学者,功能的实现方式可能并不是最优的,并且可能会有一些bug,希望使用者谅解.并且,由于作者很懒,开发进度可能很相当的慢.如果你有一些意见或建议或者别的,欢迎联系作者.
+
+关于本包的版权问题,作者还没有计划,可预见的是,本包只会在极小的范围内被使用,所以先放着吧.
+
+以下是\texttt{tikz-14mv}宏包的一个简单示例,以展示该宏包的基础功能.
+\begin{multicols}{2}
+\begin{verbatim}
+\usepackage{tikz-14mv}
+\begin{document}
+\begin{fmv}{3}{4}
+    2 &   & e & f\\
+    1 & f & A & 8\\
+    h &   & 7 \\
+\end{fmv}
+\end{document}
+\end{verbatim}
+\columnbreak
+\begin{figure}[H]
+    \centering
+    \begin{fmv}{3}{4}
+        2 &   & e & f\\
+        1 & f & A & 8\\
+        h &   & 7 \\
+    \end{fmv}
+    \caption{绘制结果}
+\end{figure}
+\end{multicols}
+
+\section{绘制指令介绍}
+\subsection{基础设定}
+本宏包只提供了两个命令,分别是\verb|fmv|环境和\verb|\fmvsetup|命令.其中\texttt{fmv}环境用于绘制题板,\ \texttt{fmvsetup}命令用于设置对此宏包进行一些设置.
+
+本宏包中默认格子大小为0.5\,cm,网格线宽度为0.02\,cm,上下左右边距均为0.4\,cm.如果你需要改变这些设置,参见\ref{sec:图形设置}.
+\subsection{绘制棋盘}
+本宏包中使用\texttt{fmv}环境绘制棋盘,其语法如下:
+
+\begin{dmd}
+\verb|\begin{fmv}[|\codereplace{图形设置}\verb|]{|\codereplace{行数}\verb|}{|\codereplace{列数}\verb|}|\\
+\verb|    |\codereplace{内容}\\
+\verb|\end{fmv}|\\
+\end{dmd}
+
+其中\codereplace{行数}和\codereplace{列数}分别表示棋盘的行数和列数.在\codereplace{内容}部分,你需要输入一个使用\verb|&|和\verb|\\|作为分隔符的字符串,关于\codereplace{图形设置},参加\ref{sec:图形设置}.\ \verb|&|用于分隔同一行每格之间的内容,而\verb|\\|用于开启下一行.此环境会将你输入的文本转换为对应元素依次置入题板,转换规则见下表.
+
+\fmvsetup{
+    tmargin=0cm,
+    bmargin=0cm,
+    lmargin=0cm,
+    rmargin=0cm,
+    gridwidth=0cm,
+}
+
+\begin{table}[h]
+    \caption{转换规则}
+    \centering
+    \begin{tabular}{lc}
+    \toprule
+    输入内容 & 转换结果 \\
+    \midrule
+    \texttt{数字或大写字母} &
+    \parbox[c]{2cm}
+    {
+        \centering
+        \begin{fmv}{1}{2}
+        2&B
+    \end{fmv}
+    } \\
+    \texttt{f} &
+    \parbox[c]{2cm}
+    {   
+        \centering
+        \begin{fmv}{1}{1}
+        f
+        \end{fmv}
+    } \\ 
+    \texttt{e} &
+    \parbox[c]{2cm}
+    {   
+        \centering
+        \begin{fmv}{1}{1}
+        e
+        \end{fmv}
+    } \\ 
+    \texttt{h} &
+    \parbox[c]{2cm}
+    {   
+        \centering
+        \begin{fmv}{1}{1}
+        h
+        \end{fmv}
+    } \\ 
+    \texttt{空字符串或其他字符} &
+    \parbox[c]{2cm}
+    {
+        \centering
+        \begin{fmv}{1}{1}
+        a
+        \end{fmv}
+    } \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{个性化设置}
+\subsubsection{配色设置}
+在原版游戏中,玩家可以自定义他们的配色方案,本宏包也提供了这个功能,并且与原版游戏的逻辑基本一致(但是一些原版游戏中的一些染色功能尚未实现).还需要注意,尽管使用与原版游戏相同的设置,本包绘制出的效果依然有一些不同,会出现一些微小色差.
+
+本包的默认配色方案与原版游戏的默认方案一致,每种颜色的内部名称及其默认RGB值如表\ref{colorlist}.
+
+\begin{table}[htb]
+    \caption{颜色列表}
+    \label{colorlist}
+    \begin{tabular}{lcccc}
+        \toprule
+        内部名称           & R   & G   & B   & 使用场景                    \\
+        \midrule
+        \verb|background| & 0   & 0   & 0   & 棋盘的背景色 \\
+        \verb|foreground| & 255 & 255 & 255 & 前景色,用于边框和一般线索 \\
+        \verb|errorcolor| & 255 & 0   & 0   & 错误色,用于错误提示 \\
+        \verb|hintcolor|  & 0   & 255 & 0   & 用于标记可推格 \\
+        \verb|hint2color| & 255 & 255 & 128 & 用于旗子和标记需要用到的线索 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+用户可以使用\verb|\definecolor{|\codereplace{名称}\verb|}{|\codereplace{色彩模型}\verb|}{|\codereplace{颜色值}\verb|}|来重定义颜色以实现改变配色方案,例如:
+\begin{verbatim}
+\definecolor{background}{RGB}{27,27,27}
+\end{verbatim}
+
+\subsubsection{图形设置}
+\label{sec:图形设置}
+本包提供了多个键值对用于设置绘图的一些参数,具体如表\ref{tab:图形设置}:
+\begin{table}[ht]
+    \label{tab:图形设置}
+    \centering
+    \caption{图形设置键值对}
+    \begin{tabular}{lccc}
+        \toprule
+        键名 & 变量类型 & 说明 & 默认值 \\
+        \midrule
+        \texttt{gridwidth} & 固定长度 & 框线宽度&0.02\,cm \\
+        \texttt{tmargin} & 固定长度 & 上边距 &0.4\,cm \\
+        \texttt{lmargin} & 固定长度 & 左边距 &0.4\,cm \\
+        \texttt{rmargin} & 固定长度 & 右边距 &0.4\,cm \\
+        \texttt{bmargin} & 固定长度 & 下边距 &0.4\,cm \\
+        \texttt{scale} & 浮点数 & \centering 缩放比例(应用于所有参数) &1.0 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+你可以使用\verb|\fmvsetup|命令来设置这些参数,也可以将其作为\verb|fmv|环境的可选项,例如:
+
+\begin{table}[ht]
+    \begin{multicols}{2}
+        \begin{verbatim}
+        \fmvsetup{
+            tmargin=0.5cm,
+            bmargin=0.6cm}
+        \begin{fmv}[scale=1.5]{2}{2}
+            1 & 4 \\
+            M & V \\
+        \end{fmv}
+        \end{verbatim}
+        \columnbreak
+        \begin{figure}[H]
+            \centering
+            \begin{fmv}[
+                scale=1.5,
+                gridwidth=0.02cm,
+                tmargin=0.5cm,
+                lmargin=0.4cm,
+                rmargin=0.4cm,
+                bmargin=0.5cm,]{2}{2}
+                1 & 4 \\
+                M & V \\
+            \end{fmv}
+            \caption{绘制结果}
+        \end{figure}
+    \end{multicols}
+\end{table}
+\pagebreak
+\section{计划实现的功能}
+目前,本宏包还不能绘制出原版游戏的所有元素,更遑论发挥玩家的创造性用于出题.为了提高使用性,本宏包还计划添加以下内容.不过作者很懒,不知道这些内容什么时候能实装,换句话说,就是Cooming S$\infty$n!
+\begin{enumerate}
+    \item 副板功能
+    \item 棋盘格染色实现
+    \item 增加更多线索样式,如:
+          \begin{itemize}
+            \item 高亮线索
+            \item 淡化无用线索
+            \item 两位数字
+            \item 同格多线索
+            \item 角标
+            \item 视差线索
+            \item >0线索
+            \item 2E' 线索
+          \end{itemize}
+    
+    
+\end{enumerate}
+\end{document}

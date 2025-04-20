@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage{expl3}
+\usepackage{tikz}
+\usepackage{fontspec}
+\usepackage{xparse}
+
+% ========== 配置区 ==========
+% 颜色配置
+\definecolor{background}{RGB}{0,0,0}
+\definecolor{foreground}{RGB}{255,255,255}
+\definecolor{errorcolor}{RGB}{255,0,0}
+\definecolor{hintcolor}{RGB}{0,255,0}
+\definecolor{hint2color}{RGB}{255,255,0}
+
+% 字体配置
+\newfontfamily{\mvfont}{CopperplateCC-Heavy.otf}
+
+\begin{document}
+
+\ExplSyntaxOn
+
+% 格子大小
+\dim_new:N \l__fmv_cellsize_dim
+\dim_set:Nn \l__fmv_cellsize_dim {0.5cm}
+
+% 框线宽度/cm
+\dim_new:N \l_fmv_gridwidth_dim
+
+% 边距
+\dim_new:N \l_fmv_tmargin_dim
+\dim_new:N \l_fmv_lmargin_dim
+\dim_new:N \l_fmv_rmargin_dim
+\dim_new:N \l_fmv_bmargin_dim
+
+\dim_new:N \l_fmv_scale_fp
+
+\keys_define:nn {tikz-14mv} {
+  gridwidth     .dim_set:N = \l_fmv_gridwidth_dim,
+  gridwidth     .initial:n = 0.02cm,
+  tmargin       .dim_set:N = \l_fmv_tmargin_dim,
+  tmargin       .initial:n = 0.4cm,
+  lmargin       .dim_set:N = \l_fmv_lmargin_dim,
+  lmargin       .initial:n = 0.4cm,
+  rmargin       .dim_set:N = \l_fmv_rmargin_dim,
+  rmargin       .initial:n = 0.4cm,
+  bmargin       .dim_set:N = \l_fmv_bmargin_dim,
+  bmargin       .initial:n = 0.4cm,
+  scale         .fp_set:N = \l_fmv_scale_fp,
+  scale         .initial:n = 1,
+}
+
+\cs_set:Npn \fmv_drawBoard_without_sb:nn #1#2{
+  \fill[background]
+    (\dim_eval:n{-\l_fmv_lmargin_dim}, \dim_use:N \l_fmv_tmargin_dim) rectangle
+    (\dim_eval:n{#2 \l__fmv_cellsize_dim + \l_fmv_lmargin_dim} , \dim_eval:n{- #1 \l__fmv_cellsize_dim - \l_fmv_bmargin_dim});
+
+  \draw[step=\dim_use:N\l__fmv_cellsize_dim, foreground, line~width = \fp_eval:n{\l_fmv_scale_fp * \l_fmv_gridwidth_dim}]
+    (0,0) grid
+    (\dim_eval:n{#2 \l__fmv_cellsize_dim}, \dim_eval:n{- #1 \l__fmv_cellsize_dim});
+}
+
+\NewDocumentCommand{\drawBoard}{m m}{\fmv_drawBoard_without_sb:nn{#1}{#2}}
+
+\ExplSyntaxOff
+
+\begin{tikzpicture}
+  \drawBoard{5}{5}
+  \draw[foreground, line width = 0.02cm]
+    (0,0)--(0.5,-0.5);
+  
+\end{tikzpicture}
+
+\end{document}
