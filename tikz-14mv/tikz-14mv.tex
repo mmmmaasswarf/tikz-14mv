@@ -15,7 +15,7 @@
 \pagestyle{plain}
 \title{tikz-14mv宏包使用手册}
 \author{中指君}
-\date{2025/3/15\qquad v0.1}
+\date{2025/3/15\qquad v0.2}
 
 \xeCJKDeclareSubCJKBlock{angleBracket}{
     "27E8 -> "27E9, %〈〉半角括号
@@ -60,21 +60,25 @@
 \begin{verbatim}
 \usepackage{tikz-14mv}
 \begin{document}
-\begin{fmv}{3}{4}
-    2 &   & e & f\\
-    1 & f & A & 8\\
-    h &   & 7 \\
-\end{fmv}
+\begin{tikzpicture}
+    \begin{fmv}{3}{4}
+        2 &   & e & f\\
+        1 & f & A & 8\\
+        h &   & ? \\
+    \end{fmv}
+\end{tikzpicture}
 \end{document}
 \end{verbatim}
 \columnbreak
 \begin{figure}[H]
     \centering
-    \begin{fmv}{3}{4}
-        2 &   & e & f\\
-        1 & f & A & 8\\
-        h &   & 7 \\
-    \end{fmv}
+    \begin{tikzpicture}
+        \begin{fmv}{3}{4}
+            2 &   & e & f\\
+            1 & f & A & 8\\
+            h &   & ? \\
+        \end{fmv}
+    \end{tikzpicture}
     \caption{绘制结果}
 \end{figure}
 \end{multicols}
@@ -83,9 +87,9 @@
 \subsection{基础设定}
 本宏包只提供了两个命令,分别是\verb|fmv|环境和\verb|\fmvsetup|命令.其中\texttt{fmv}环境用于绘制题板,\ \texttt{fmvsetup}命令用于设置对此宏包进行一些设置.
 
-本宏包中默认格子大小为0.5\,cm,网格线宽度为0.02\,cm,上下左右边距均为0.4\,cm.如果你需要改变这些设置,参见\ref{sec:图形设置}.
+本宏包中默认格子大小为0.5\,cm,网格线宽度为0.02\,cm,上下左右边距均为0.4\,cm.如果你需要改变这些设置,参见\ \ref{sec:图形设置}.
 \subsection{绘制棋盘}
-本宏包中使用\texttt{fmv}环境绘制棋盘,其语法如下:
+本宏包中使用\texttt{fmv}环境绘制棋盘,其需要在\verb|tikzpicture|环境下使用, 语法如下:
 
 \begin{dmd}
 \verb|\begin{fmv}[|\codereplace{图形设置}\verb|]{|\codereplace{行数}\verb|}{|\codereplace{列数}\verb|}|\\
@@ -93,7 +97,7 @@
 \verb|\end{fmv}|\\
 \end{dmd}
 
-其中\codereplace{行数}和\codereplace{列数}分别表示棋盘的行数和列数.在\codereplace{内容}部分,你需要输入一个使用\verb|&|和\verb|\\|作为分隔符的字符串,关于\codereplace{图形设置},参加\ref{sec:图形设置}.\ \verb|&|用于分隔同一行每格之间的内容,而\verb|\\|用于开启下一行.此环境会将你输入的文本转换为对应元素依次置入题板,转换规则见下表.
+其中\codereplace{行数}和\codereplace{列数}分别表示棋盘的行数和列数.在\codereplace{内容}部分,你需要输入一个使用``\verb|&|''和``\verb|\\|''作为分隔符的字符串,关于\codereplace{图形设置},参见\ \ref{sec:图形设置}.\ ``\verb|&|''用于分隔同一行每格之间的内容,而``\verb|\\|''用于开启下一行.此环境会将你输入的文本转换为对应元素依次置入题板,转换规则见下表.
 
 \fmvsetup{
     tmargin=0cm,
@@ -114,41 +118,61 @@
     \parbox[c]{2cm}
     {
         \centering
-        \begin{fmv}{1}{2}
-        2&B
-    \end{fmv}
+        \begin{tikzpicture}
+            \begin{fmv}{1}{2}
+                2&B
+            \end{fmv}
+        \end{tikzpicture}
     } \\
     \texttt{f} &
     \parbox[c]{2cm}
     {   
         \centering
-        \begin{fmv}{1}{1}
-        f
-        \end{fmv}
+    \begin{tikzpicture}
+            \begin{fmv}{1}{1}
+                f
+            \end{fmv}
+    \end{tikzpicture}
     } \\ 
     \texttt{e} &
     \parbox[c]{2cm}
     {   
         \centering
-        \begin{fmv}{1}{1}
-        e
-        \end{fmv}
+        \begin{tikzpicture}
+            \begin{fmv}{1}{1}
+                e
+            \end{fmv}
+        \end{tikzpicture}
     } \\ 
     \texttt{h} &
     \parbox[c]{2cm}
     {   
         \centering
-        \begin{fmv}{1}{1}
-        h
-        \end{fmv}
+        \begin{tikzpicture}
+            \begin{fmv}{1}{1}
+                h
+            \end{fmv}
+        \end{tikzpicture}
+    } \\
+    \texttt{?} &
+    \parbox[c]{2cm}
+    {   
+        \centering
+        \begin{tikzpicture}
+            \begin{fmv}{1}{1}
+                ?
+            \end{fmv}
+        \end{tikzpicture}
     } \\ 
     \texttt{空字符串或其他字符} &
     \parbox[c]{2cm}
     {
         \centering
-        \begin{fmv}{1}{1}
-        a
-        \end{fmv}
+        \begin{tikzpicture}
+            \begin{fmv}{1}{1}
+                a
+            \end{fmv}
+        \end{tikzpicture}
     } \\
     \bottomrule
     \end{tabular}
@@ -158,7 +182,7 @@
 \subsubsection{配色设置}
 在原版游戏中,玩家可以自定义他们的配色方案,本宏包也提供了这个功能,并且与原版游戏的逻辑基本一致(但是一些原版游戏中的一些染色功能尚未实现).还需要注意,尽管使用与原版游戏相同的设置,本包绘制出的效果依然有一些不同,会出现一些微小色差.
 
-本包的默认配色方案与原版游戏的默认方案一致,每种颜色的内部名称及其默认RGB值如表\ref{colorlist}.
+本包的默认配色方案与原版游戏的默认方案一致,每种颜色的内部名称及其默认RGB值如表\ \ref{colorlist}.
 
 \begin{table}[htb]
     \caption{颜色列表}
@@ -183,7 +207,7 @@
 
 \subsubsection{图形设置}
 \label{sec:图形设置}
-本包提供了多个键值对用于设置绘图的一些参数,具体如表\ref{tab:图形设置}:
+本包提供了多个键值对用于设置绘图的一些参数,具体如表\ \ref{tab:图形设置}:
 \begin{table}[ht]
     \label{tab:图形设置}
     \centering
@@ -218,16 +242,18 @@
         \columnbreak
         \begin{figure}[H]
             \centering
-            \begin{fmv}[
-                scale=1.5,
-                gridwidth=0.02cm,
-                tmargin=0.5cm,
-                lmargin=0.4cm,
-                rmargin=0.4cm,
-                bmargin=0.5cm,]{2}{2}
-                1 & 4 \\
-                M & V \\
-            \end{fmv}
+            \begin{tikzpicture}
+                \begin{fmv}[
+                    scale=1.5,
+                    gridwidth=0.02cm,
+                    tmargin=0.5cm,
+                    lmargin=0.4cm,
+                    rmargin=0.4cm,
+                    bmargin=0.5cm,]{2}{2}
+                    1 & 4 \\
+                    M & V \\
+                \end{fmv}
+            \end{tikzpicture}
             \caption{绘制结果}
         \end{figure}
     \end{multicols}
