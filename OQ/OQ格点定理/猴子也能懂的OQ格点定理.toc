@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}前言}{2}{section.1}%
+\contentsline {section}{\numberline {2}OQ格点定理}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Pick定理}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}{\Noto [O]}{\Noto [Q]}题板的最小雷数}{3}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}OQ格点定理的一般形式}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}OQ格点定理的推论}{5}{subsection.2.4}%
+\contentsline {section}{\numberline {3}其他规则下的格点定理}{7}{section.3}%
+\contentsline {section}{\numberline {4}致谢与感言}{7}{section.4}%
+\contentsline {section}{\numberline {A}补充材料}{8}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}{\Noto [O]}{\Noto [Q]}规则下非雷区域的边界为简单多边形}{8}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}{\Noto [O]}{\Noto [Q]}的下确界}{9}{subsection.A.2}%

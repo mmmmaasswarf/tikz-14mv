@@ -1,0 +1,439 @@
+\documentclass{ctexart}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{tikz-14mv}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{fontspec}
+\usepackage{booktabs}
+\usepackage{subfig}
+\usepackage{todonotes}
+
+\newfontfamily{\mvfont}{CopperplateCC-Heavy.otf}
+\newfontfamily{\Noto}{NotoSans-SemiBold.ttf}
+\hypersetup
+{
+    colorlinks = true,
+}
+\pagestyle{plain}
+\title{猴子也能懂的OQ格点定理}
+\author{中指君}
+\newcommand{\varible}[1]{{\Noto[#1]}}
+\newcommand{\variblep}[1]{{[#1]}}
+\newcommand{\redcross}[2]{
+    \begin{scope}[thick,color = red,shift={(#1,#2)}]
+        \draw (0.05,-0.05) -- (-0.05,0.05);
+        \draw (-0.05,-0.05) -- (0.05,0.05);
+    \end{scope}
+}
+\newcommand{\yellowcross}[2]{
+    \begin{scope}[thick,color = yellow,shift={(#1,#2)}]
+        \draw (0.05,-0.05) -- (-0.05,0.05);
+        \draw (-0.05,-0.05) -- (0.05,0.05);
+    \end{scope}
+}
+\newcommand{\greencross}[2]{
+    \begin{scope}[thick,color = green,shift={(#1,#2)}]
+        \draw (0.05,-0.05) -- (-0.05,0.05);
+        \draw (-0.05,-0.05) -- (0.05,0.05);
+    \end{scope}
+}
+\newcommand{\greenlinedot}[4]{
+    \draw[color = cyan,line width = 1.5] (#1,#2) -- (#3,#4);
+    \draw[fill, color = green] (#1,#2) circle (0.03);
+    \draw[fill, color = green] (#3,#4) circle (0.03);
+    }
+\newtheorem{property}{性质}
+\newtheorem{theorem}{定理}
+\newtheorem{lemma}{引理}
+\newtheorem{definition}{定义}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\pagebreak
+\section{前言}
+OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用的定理, 此定理限制了雷格的可能分布, 简化了很多总雷数相关的推理.
+首先, 我们先来回顾一下\varible{O}\varible{Q}规则的定义:
+\begin{itemize}
+    \item \varible{O}{\heiti 外部: 非雷区域四方向联通, 雷区域与题板外部四方向联通.}
+    \item \varible{Q}{\heiti 无方: 每个$2\times2$区域内都至少有一个雷.}
+\end{itemize}
+
+我们讨论主要讨论题板中格点的性质, 现给出格点的定义如下:
+\begin{definition}
+    题板中横纵线段的交点称为\textbf{格点}.
+\end{definition}
+需注意的是, 格点并不一定是四个格子的公共点, 题板的边界上也存在格点, 例如: $8\times8$题板含有$(8+1)^2 = 81$个格点.
+
+另外\varible{O}\varible{Q}题板有三个重要性质, 在OQ格点定理的证明中有着重要的意义, 现叙述如下:
+
+\begin{property}
+    对于任意$2\times2$以上题板, 其存在最小雷数且不为$0$.
+\end{property}
+\begin{proof}
+    由\varible{Q}规则可知, 题板的每个$2\times2$区域内至少有一个雷, 且雷的分布情况是有限的, 因此题板存在最小雷数且不为$0$.
+\end{proof}
+\begin{property}
+    \label{p2}
+    非雷区域的边界为简单多边形.
+\end{property}
+该结论是直观的, 但其证明稍显复杂, 见附录\ \ref{proof:SimplePolygon}
+\begin{property}
+    \label{p3}
+    非雷区域内部没有格点.
+\end{property}
+\begin{proof}
+    假设非雷区域内部有格点, 则以该格点为中心的$2\times2$区域内无雷, 这与\varible{Q}规则矛盾, 因此, 非雷区域内部没有格点.
+\end{proof}
+为了方便以后的讨论,我们将格点按其与雷的相对位置的不同分为两类: 
+\begin{definition}
+    题板中位于非雷区域的边界的格点为\textbf{边界格点}.
+\end{definition}
+\begin{definition}
+    题板中除边界格点以外的格点为\textbf{雷格点}.
+\end{definition}
+如图\ \ref{gridpoint}\ 所示, 非雷区域由绿线框出, 边界格点由绿色圆点标记, 雷格点由红叉标记.
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{fmv}{4}{4}
+            f & f &   &   \\
+              & f & f &   \\
+              & f & f &   \\
+              &   &   &
+        \end{fmv}
+        \redcross{0}{0}
+        \redcross{0.5}{0}
+        \redcross{1}{-1}
+        \greenlinedot{1}{0}{1.5}{0}
+        \greenlinedot{1.5}{0}{2}{0}
+        \greenlinedot{2}{0}{2}{-0.5}
+        \greenlinedot{2}{-0.5}{2}{-1}
+        \greenlinedot{2}{-1}{2}{-1.5}
+        \greenlinedot{2}{-1.5}{2}{-2}
+        \greenlinedot{2}{-2}{1.5}{-2}
+        \greenlinedot{1}{-2}{1.5}{-2}
+        \greenlinedot{1}{-2}{0.5}{-2}
+        \greenlinedot{0}{-2}{0.5}{-2}
+        \greenlinedot{0}{-2}{0}{-1.5}
+        \greenlinedot{0}{-1}{0}{-1.5}
+        \greenlinedot{0}{-0.5}{0}{-1}
+        \greenlinedot{0}{-0.5}{0.5}{-0.5}
+        \greenlinedot{0.5}{-1}{0.5}{-0.5}
+        \greenlinedot{0.5}{-1}{0.5}{-1.5}
+        \greenlinedot{0.5}{-1.5}{1}{-1.5}
+        \greenlinedot{1.5}{-1.5}{1}{-1.5}
+        \greenlinedot{1.5}{-1.5}{1.5}{-1}
+        \greenlinedot{1.5}{-0.5}{1.5}{-1}
+        \greenlinedot{1.5}{-0.5}{1}{-0.5}
+        \greenlinedot{1}{0}{1}{-0.5}
+    \end{tikzpicture}
+    \caption{格点的分类}
+    \label{gridpoint}
+\end{figure}
+\section{OQ格点定理}
+\subsection{Pick定理}
+在具体证明OQ格点定理之前, 我们需要先介绍一个重要的定理, 作为OQ格点定理证明的核心:
+\begin{lemma}[Pick定理]
+    \label{pick}
+    对于一个简单多边形, $I$为多边形内部的格点数, $B$为多边形边界的格点数, 则有:
+    \begin{equation}
+        A = I + \frac{B}{2} - 1.
+    \end{equation}
+    其中$A$为多边形的面积.
+\end{lemma}
+这是一个非常经典的定理, 其证明略.
+
+\subsection{\varible{O}\varible{Q}题板的最小雷数}
+为了便于理解, 我们先从研究\varible{O}\varible{Q}题板的最小雷数开始， 这是OQ格点定理的一个特殊情况.
+
+对于一个$m\times n$的题板, 设题板的雷数为$R$, 则非雷区域面积为$mn-R$, 总格点数为$(m+1)(n+1)$, 根据\hyperref[p2]{性质2}, 非雷区域内部格点数为0, 对非雷区域应用\ \hyperref[pick]{Pick定理}, 则有:
+\begin{equation}
+    \label{basic equation}
+    mn - R = \frac{B}{2} - 1.
+\end{equation}
+由此, 我们可以得到\varible{O}\varible{Q}题板的总雷数满足:
+
+\begin{align}
+    R &= mn - \frac{B}{2} + 1 \nonumber\\ 
+      &\leqslant mn - \left\lceil \frac{(m+1)(n+1)}{2} \right\rceil + 1 \nonumber\\
+      &= \left\lceil \frac{(m-1)(n-1)}{2} \right\rceil.
+\end{align}
+对于这个结论, 要做两点说明:
+\begin{enumerate}
+    \item 这里只证明了$R$的下界为$\left\lceil \frac{(m-1)(n-1)}{2} \right\rceil$, 不仅如此, 实际上这个数还是下确界, 关于其为下确界的证明, 参见附录\ \ref{inf}.
+    \item 由于其中的字母必为整数, 所以引入了向上取整符号, 这同时提醒我们, 在\varible{O}\varible{Q}题板中, 非雷区域的边界格点的数目必为偶数, 换言之, 雷格点数目也受到限制.
+    
+    为了便于理解, 我们在这里举一个例子: 使用上式计算可得: $2\times4$题板的最小雷数为$2$, 其分布仅有如图\ \ref{example}\ 上的三种情况(忽略对称的情况), 由于总格点数为奇数, 而边界格点数目为偶数, 所以雷格点数目为奇数且为1, 可直观地用图形验证(雷格点用红叉标出).
+
+    事实上,雷格点的分布就是OQ格点定理要讨论的内容.
+\end{enumerate}
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{fmv}{2}{4}
+        \\
+        & f & f \\
+        \end{fmv}
+        \redcross{1}{-1}
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \begin{fmv}{2}{4}
+        \\
+        f & & f \\
+        \end{fmv}
+        \redcross{0}{-1}
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \begin{fmv}{2}{4}
+        f \\
+        & & f & \\
+        \end{fmv}
+        \redcross{0}{0}
+    \end{tikzpicture}
+    \caption{$2\times4$题板的例子}
+    \label{example}
+\end{figure}
+
+\subsection{OQ格点定理的一般形式}
+有了前面的铺垫, 我们几乎就可以得到OQ格点定理了, 有兴趣的读者可以尝试利用以上内容得到自己的结论(提示:考虑总雷数$R$为任意的情况).
+
+接下来给出较为常用的一个结论:
+\begin{theorem}[OQ格点第一定理]
+    对于总雷数为$R$的$m\times n\ $\varible{O}\varible{Q}题板, 雷格点数$M = 2R - (m-1)(n-1)$.
+\end{theorem}
+\begin{proof}
+    由式\ \ref{basic equation}\ 可知, 
+    $$
+    B = 2(mn - R -1),
+    $$
+    则雷格点数为
+    \begin{align*}
+        M &= (m+1)(n+1) - B \\
+          &= (mn + m + n +1) -2(mn - R -1) \\
+          &= 2R - (m-1)(n-1).
+    \end{align*}
+\end{proof}
+
+在实际游玩中, 题板大小和总雷数是固定的, 也即:
+\begin{itemize}
+    \item 对于$5\times5$题板, $R = 10, M = 2R - (5-1)^2 = 4$;
+    \item 对于$6\times6$题板, $R = 14, M = 2R - (6-1)^2 = 3$;
+    \item 对于$7\times7$题板, $R = 20, M = 2R - (7-1)^2 = 4$;
+    \item 对于$8\times8$题板, $R = 26, M = 2R - (8-1)^2 = 3$.
+\end{itemize}
+
+\subsection{OQ格点定理的推论}
+在实际游玩过程中, 还有一些情况, 仅仅使用OQ格点第一定理仍然难以得出结论, 这时我们可以使用OQ格点定理的增强形式. 不过, 这一推论的证明更加复杂, 所以我们仍先从一个例子开始慢慢讲解.
+
+我们仍然从$2\times4$题板开始, 当$R = 2$时, 如前, 雷格点数为1. 让我们进一步观察雷格点的分布, 可以发现, 即使考虑到对称的所有情况, 雷格点的位置也只可能出现在如图\ \ref{example2}\ 所示的六个位置之一(用黄叉标记).
+\begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+        \begin{fmv}{2}{4}
+        \end{fmv}
+        \yellowcross{0}{0}
+        \yellowcross{0}{-1}
+        \yellowcross{1}{0}
+        \yellowcross{1}{-1}
+        \yellowcross{2}{0}
+        \yellowcross{2}{-1}
+    \end{tikzpicture}
+    \caption{雷格点的可能位置}
+    \label{example2}
+\end{figure}
+
+再看$R = 3$的情况, 这时雷格点数为3, 在不计对称性的意义下, 共有4种情况, 如图\ \ref{example3}\ 所示.
+\begin{figure}[ht]
+    \begin{tikzpicture}
+        \begin{fmv}{2}{4}
+            f & f & f 
+        \end{fmv}
+        \redcross{0}{0}
+        \redcross{1}{0}
+        \greencross{0.5}{0}
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \begin{fmv}{2}{4}
+            f & f \\
+              &   &   & f \\
+        \end{fmv}
+        \redcross{0}{0}
+        \redcross{2}{-1}
+        \greencross{0.5}{0}
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \begin{fmv}{2}{4}
+            f & & f\\
+            f \\
+        \end{fmv}
+        \redcross{0}{0}
+        \redcross{0}{-1}
+        \greencross{0}{-0.5}
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \begin{fmv}{2}{4}
+            f & & f & f \\
+        \end{fmv}
+        \redcross{0}{0}
+        \redcross{2}{0}
+        \greencross{1.5}{0}
+    \end{tikzpicture}
+    \caption{$R=3$时雷格点的分布}
+    \label{example3}
+\end{figure}
+
+你可能注意到, 这里分别使用了红色和绿色的叉来标记雷格点, 标注规则是这样的: 首先, 将网格看成一个平面直角坐标系, 以左上角为原点, 每个格子的长宽均为1, 横纵坐标之和为偶数的格点定义为\textbf{偶格点}, 横纵坐标之和为奇数的格点定义为\textbf{奇格点}. 若雷格点为偶格点, 则用红色叉标记, 若为奇格点则用绿色叉标记.
+
+图\ \ref{example2}\ 中可以看到, 三个雷格点中有两个偶格点, 一个奇格点. 对于前述的$R = 2$的情况, 雷格点数为1 ,一定是偶格点. 其一般规律为:
+\begin{theorem}[OQ格点第二定理]
+    对于任意\varible{O}\varible{Q}题板中的雷格点, 其中偶格点数为$E$, 奇格点数为$O$, 则有:
+    \begin{equation}
+        E - O = 0\ \text{或}\ 1.
+    \end{equation}    
+\end{theorem}
+\begin{proof}
+    若题板上不全为雷, 由\hyperref[p2]{性质2}\ 可知, 非雷区域的边界为简单多边形, 任取一个格点作为起点, 沿着边界格点的顺序遍历,直到回到起点, 可保证除起点外每个点会且只会经过一次. 在遍历过程中, 偶格点和奇格点交替出现, 因此边界格点中奇偶格点数目相等. 特殊地, 若题板上全为雷, 边界格点数为0, 同样满足以上结论. 综上所述, 边界格点中奇偶格点数目相等.
+
+    因此, 若$m,n$均为偶数, 则题板中偶格点比奇格点多1, 除去其中的边界格点, 雷格点中偶格点数比奇格点数多1; 反之同理, 雷格点中偶格点数与奇格点数相等, 综上所述, 雷格点中偶格点数比奇格点数多0或1.
+\end{proof}
+
+在实际游玩中, 进一步有:
+\begin{itemize}
+    \item 对于$5\times5$题板, 偶雷格点数为2, 奇雷格点数为2;
+    \item 对于$6\times6$题板, 偶雷格点数为2, 奇雷格点数为1;
+    \item 对于$7\times7$题板, 偶雷格点数为2, 奇雷格点数为2;
+    \item 对于$8\times8$题板, 偶雷格点数为2, 奇雷格点数为1.
+\end{itemize}
+
+\section{其他规则下的格点定理}
+\todo{此部分将在本文章以后的版本补充.}
+
+\section{致谢与感言}
+这是本人第一次制作游戏攻略, 也应该是第一篇基于\LaTeX 写成的《14种扫雷变体》文档. 
+
+在被《14种扫雷变体》的玩法和\LaTeX 出色的排版效果吸引后, 在今年年初, 我就产生了使用\LaTeX 创作《14种扫雷变体》相关攻略的想法. 为了满足在攻略中绘图的需要, 我制作了基于Ti\emph{k}Z的宏包Ti\emph{k}Z-14mv, 本文的所有图片都是使用以上两个宏包绘制的. 同时, 这应该是Ti\emph{k}Z-14mv第一次被使用在实际的攻略中.
+
+此前, OQ格点定理常常在群里被提到, 但当时我并不了解其具体内容. 直到实际游玩\varible{O} \varible{Q}题板时, 有感其趣味性和OQ格点定理中蕴含的数学思维, 于是我顺理成章地决定将其写成攻略, 以便于更多的玩家了解. 我本计划写一个系统的\varible{O}\varible{Q}攻略, 并将本文作为其中的一部分. 但考虑到本人的水平有限, 恐怕无法撑起一篇完整的攻略, 因此仅仅写了OQ格点定理的部分.
+
+此外, 格点定理不仅在出现在\varible{O}\varible{Q}题板中, 在其他规则中也有相应的版本, 例如QS、DQ格点定理等. 这同时说明 其中蕴含的数学思维是相通的. 我也有计划在本文中简要说明其他规则下的格点定理, 不过目前我还没有具体涉足过它们. 希望在本文的未来版本中, 能够加入其他规则下的格点定理.
+
+在本文章的写作过程中, 我得到了很多群友的建议和指正, 特别要感谢灵秀之韵老师和sgo37老师, 他们分别贡献了\ \hyperref[inf]{\varible{O}\varible{Q}题板的下确界}和\hyperref[p2]{性质2}\ 的证明. 另外, 还要感谢群友们对本文章的支持和鼓励.
+
+\vspace{\stretch{2}}
+\begin{flushright}
+    中指君
+
+    写于2025年4月30日
+\end{flushright}
+\vspace{\stretch{1}}
+\pagebreak
+
+\appendix
+
+\section{补充材料}
+\subsection{\varible{O}\varible{Q}规则下非雷区域的边界为简单多边形}
+群友sgo37给出了一个涉及图论的\hyperref[p2]{性质2}\ 的证明, 为了使得对图论了解程度不同的读者都能理解本证明, 先不那么系统地介绍一下图论的基本概念.
+
+首先, 图是一些点(称为\textbf{顶点})和点之间的连线(称为\textbf{边})构成的, 在图论研究中,我们只关心顶点和边的关系, 而点和每个点的位置, 线的形状如何都不在考虑范围内.
+
+不考虑一条边的两端是同一个顶点, 或者两个顶点间有多余一条边的情况(称为``简单的''), 与$V_i$关联(连接)的边数, 称作顶点$V_i$的度数, 记作$\deg(V_i)$, 由于一个边连接两点, 所以一个图的边数$E$是所有点度数之和的一半, 也即
+$$
+E = \frac{1}{2}\sum_{V}\deg(V_i).
+$$
+
+另外, 如果一个图能画成所有边都不相交的样子, 则称这个图为平面图, 有欧拉公式:
+$$
+V - E + F = 2.
+$$
+其中$V$为顶点数, $E$为边数, $F$为面数(可理解为平面图被分成区域的数量).
+
+于是, 引出\hyperref[p2]{性质2}\ 的证明:
+\begin{proof}
+    \label{proof:SimplePolygon}
+    首先, 非雷区域是无``洞''的, 换言之, 非雷区域是单连通区域. 否则雷区域与题板外部无法四方向联通, 这与\varible{O}规则矛盾. 因此, 非雷区域的边界是一条闭合曲线.
+    那么, 将所有边界格点作为顶点, 相邻两边界格点于非雷区域边界上的连线作为边, 成为一个简单平面图, 有如下性质:
+    \begin{enumerate}
+        \item 其只有两个面, 对应非雷区域和雷区域及题板外部;
+        \item 每个顶点的度数$\deg(V_i) = 2\ \text{或}\ 4$
+    \end{enumerate}
+    其边数$\displaystyle E = \frac{1}{2}\sum_{V}\deg(V_i)$, 面数为$F = 2$
+    由平面图的欧拉公式
+    $$
+    V - E + F = 2
+    $$
+    得
+    \begin{align*}
+        V - \frac{1}{2}\sum_{V}\deg(V_i) + 2 &= 2 \\
+            V - \frac{1}{2}\sum_{V}\deg(V_i) &= 0 \\
+                           \sum_{V}\deg(V_i) &= 2V\\
+                                   \deg(V_i) &= 2
+    \end{align*}
+    由此可知, 每个边界格点的度数均为2, 即边界不会自交, 即边界是一个简单多边形.
+\end{proof}
+这是一个\varible{O}题板的性质. 同样表明, \varible{O}题板中不含``扭断'', 即
+\begin{tikzpicture}
+    \begin{fmv}[
+        tmargin = 1pt,
+        lmargin = 1pt,
+        rmargin = 1pt,
+        bmargin = 1pt,
+        scale = 1]{2}{2}
+    ? & f \\
+    f & ?
+    \end{fmv}
+\end{tikzpicture},
+因为此结构中中心格点的度数为4.
+
+\subsection{\varible{O}\varible{Q}的下确界}
+\label{inf}
+此前证明了$R$的下界为$\left\lceil \frac{(m-1)(n-1)}{2} \right\rceil$, 要证明其同时为下确界,只需给出一种满足要求的构造方式即可. 如下的构造由群友灵秀之韵给出:
+\begin{itemize}
+    \item 当$m,n$均为偶数时, 取如\ \ref{even}\ 的分布;
+    \item 当$m,n$其中一个为奇数时, 取如\ \ref{odd}\ 的分布.
+\end{itemize}
+\fmvsetup{
+    tmargin = 0.2cm,
+    lmargin = 0.2cm,
+    rmargin = 0.2cm,
+    bmargin = 0.2cm,
+}
+\begin{figure}[ht]
+    \subfloat[$m,n$均为偶数]{
+        \label{even}
+        \begin{tikzpicture}
+            \begin{fmv}{8}{10}
+                \\
+                & f & f & f & f & f & f & f & f & f \\
+                \\
+                & f & f & f & f & f & f & f & f & f \\
+                \\
+                & f &   & f & f & f &   & f & f & f  \\
+                & f & f & f &   & f & f & f &   &    \\
+                &   &   &   &   &   &   &   &   & f  \\
+            \end{fmv}
+        \end{tikzpicture}
+    }
+    \subfloat[$m,n$其中一个为奇数]{
+        \label{odd}
+        \begin{tikzpicture}
+            \begin{fmv}{6}{11}
+                \\
+                & f & & f & & f & & f & & f \\
+                & f & & f & & f & & f & & f \\
+                & f & & f & & f & & f & & f \\
+                & f & & f & & f & & f & & f \\
+                & f & & f & & f & & f & & f \\
+            \end{fmv}
+        \end{tikzpicture}
+    }
+\end{figure}
+
+\end{document}

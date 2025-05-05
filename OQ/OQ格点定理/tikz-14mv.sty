@@ -243,11 +243,11 @@
 {
   \group_begin:
   \keys_set:nn {tikz-14mv} {#1}
-  \begin{tikzpicture}[transform~shape, scale=\fp_eval:n{\l_fmv_scale_fp}]
+  \begin{scope}[transform~shape, scale=\fp_eval:n{\l_fmv_scale_fp}]
     \fmv_drawBoard_without_sb:nn{#2}{#3}
     \fmv_drawMainBoard:n {#4}
 }
 {
-  \end{tikzpicture}
+  \end{scope}
   \group_end:
 }
