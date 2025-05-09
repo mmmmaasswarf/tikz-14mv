@@ -6,7 +6,7 @@
 \usepackage{fontspec}
 \usepackage{booktabs}
 
-
+\setlength{\columnseprule}{1pt}
 \newfontfamily{\mvfont}{CopperplateCC-Heavy.otf}
 \hypersetup
 {
@@ -53,11 +53,12 @@
 
 需要注意的是,本宏包还处于未完成版本,还有很多在原版游戏中存在的功能没有实现,文中介绍的命令可能在后续版本中被改变.由于作者是\LaTeX 初学者,功能的实现方式可能并不是最优的,并且可能会有一些bug,希望使用者谅解.并且,由于作者很懒,开发进度可能很相当的慢.如果你有一些意见或建议或者别的,欢迎联系作者.
 
-关于本包的版权问题,作者还没有计划,可预见的是,本包只会在极小的范围内被使用,所以先放着吧.
+本包采用了 GNU General Public License v3.0 许可证, 这意味着你可以自由地使用这些内容. 虽然我不认为这些内容会涉及版权纠纷或是被用于其他商业用途, 但我还是加上了它, 只是为了好玩, 或者说仪式感.
 
 以下是\texttt{tikz-14mv}宏包的一个简单示例,以展示该宏包的基础功能.
 \begin{multicols}{2}
-\begin{verbatim}
+    \centering
+    \begin{verbatim}
 \usepackage{tikz-14mv}
 \begin{document}
 \begin{tikzpicture}
@@ -68,19 +69,19 @@
     \end{fmv}
 \end{tikzpicture}
 \end{document}
-\end{verbatim}
-\columnbreak
-\begin{figure}[H]
-    \centering
-    \begin{tikzpicture}
-        \begin{fmv}{3}{4}
-            2 &   & e & f\\
-            1 & f & A & 8\\
-            h &   & ? \\
-        \end{fmv}
-    \end{tikzpicture}
-    \caption{绘制结果}
-\end{figure}
+    \end{verbatim}
+    \columnbreak
+    \begin{figure}[H]
+        \centering
+        \begin{tikzpicture}
+            \begin{fmv}{3}{4}
+                2 &   & e & f\\
+                1 & f & A & 8\\
+                h &   & ? \\
+            \end{fmv}
+        \end{tikzpicture}
+        \caption{绘制结果}
+    \end{figure}
 \end{multicols}
 
 \section{绘制指令介绍}
@@ -207,39 +208,19 @@
 
 \subsubsection{图形设置}
 \label{sec:图形设置}
-本包提供了多个键值对用于设置绘图的一些参数,具体如表\ \ref{tab:图形设置}:
-\begin{table}[ht]
-    \label{tab:图形设置}
-    \centering
-    \caption{图形设置键值对}
-    \begin{tabular}{lccc}
-        \toprule
-        键名 & 变量类型 & 说明 & 默认值 \\
-        \midrule
-        \texttt{gridwidth} & 固定长度 & 框线宽度&0.02\,cm \\
-        \texttt{tmargin} & 固定长度 & 上边距 &0.4\,cm \\
-        \texttt{lmargin} & 固定长度 & 左边距 &0.4\,cm \\
-        \texttt{rmargin} & 固定长度 & 右边距 &0.4\,cm \\
-        \texttt{bmargin} & 固定长度 & 下边距 &0.4\,cm \\
-        \texttt{scale} & 浮点数 & \centering 缩放比例(应用于所有参数) &1.0 \\
-        \bottomrule
-    \end{tabular}
-\end{table}
-
-你可以使用\verb|\fmvsetup|命令来设置这些参数,也可以将其作为\verb|fmv|环境的可选项,例如:
-
+本包提供了多个键值对用于设置绘图的一些参数,具体如表\ \ref{tab:图形设置}.你可以使用\verb|\fmvsetup|命令来设置这些参数,也可以将其作为\verb|fmv|环境的可选项,例如:
 \begin{table}[ht]
     \begin{multicols}{2}
         \begin{verbatim}
-        \fmvsetup{
-            tmargin=0.5cm,
-            bmargin=0.6cm}
-        \begin{fmv}[scale=1.5]{2}{2}
-            1 & 4 \\
-            M & V \\
-        \end{fmv}
+\fmvsetup{
+    tmargin=0.5cm,
+    bmargin=0.6cm}
+\begin{fmv}[scale=1.5]{2}{2}
+    1 & 4 \\
+    M & V \\
+\end{fmv}
         \end{verbatim}
-        \columnbreak
+    \newcolumn
         \begin{figure}[H]
             \centering
             \begin{tikzpicture}
@@ -258,6 +239,25 @@
         \end{figure}
     \end{multicols}
 \end{table}
+
+\begin{table}[tbp]
+    \label{tab:图形设置}
+    \centering
+    \caption{图形设置键值对}
+    \begin{tabular}{lccc}
+        \toprule
+        键名 & 变量类型 & 说明 & 默认值 \\
+        \midrule
+        \texttt{gridwidth} & 固定长度 & 框线宽度&0.02\,cm \\
+        \texttt{tmargin} & 固定长度 & 上边距 &0.4\,cm \\
+        \texttt{lmargin} & 固定长度 & 左边距 &0.4\,cm \\
+        \texttt{rmargin} & 固定长度 & 右边距 &0.4\,cm \\
+        \texttt{bmargin} & 固定长度 & 下边距 &0.4\,cm \\
+        \texttt{scale} & 浮点数 & \centering 缩放比例(应用于所有参数) &1.0 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
 \pagebreak
 \section{计划实现的功能}
 目前,本宏包还不能绘制出原版游戏的所有元素,更遑论发挥玩家的创造性用于出题.为了提高使用性,本宏包还计划添加以下内容.不过作者很懒,不知道这些内容什么时候能实装,换句话说,就是Cooming S$\infty$n!
