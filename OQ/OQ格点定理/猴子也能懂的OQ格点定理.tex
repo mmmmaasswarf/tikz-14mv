@@ -97,7 +97,7 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
 \begin{definition}
     题板中除边界格点以外的格点为\textbf{雷格点}.
 \end{definition}
-如图\ \ref{gridpoint}\ 所示, 非雷区域由绿线框出, 边界格点由绿色圆点标记, 雷格点由红叉标记.
+如图\ \ref{gridpoint}\ 所示, 非雷区域由蓝线框出, 边界格点由绿色圆点标记, 雷格点由红叉标记.
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}
@@ -141,11 +141,10 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
 在具体证明OQ格点定理之前, 我们需要先介绍一个重要的定理, 作为OQ格点定理证明的核心:
 \begin{lemma}[Pick定理]
     \label{pick}
-    对于一个简单多边形, $I$为多边形内部的格点数, $B$为多边形边界的格点数, 则有:
+    对于一个简单多边形, $I$为多边形内部的格点数, $B$为多边形边界的格点数, 则多边形的面积$A$满足:
     \begin{equation}
         A = I + \frac{B}{2} - 1.
     \end{equation}
-    其中$A$为多边形的面积.
 \end{lemma}
 这是一个非常经典的定理, 其证明略.
 
@@ -167,9 +166,9 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
 对于这个结论, 要做两点说明:
 \begin{enumerate}
     \item 这里只证明了$R$的下界为$\left\lceil \frac{(m-1)(n-1)}{2} \right\rceil$, 不仅如此, 实际上这个数还是下确界, 关于其为下确界的证明, 参见附录\ \ref{inf}.
-    \item 由于其中的字母必为整数, 所以引入了向上取整符号, 这同时提醒我们, 在\varible{O}\varible{Q}题板中, 非雷区域的边界格点的数目必为偶数, 换言之, 雷格点数目也受到限制.
+    \item 由于其中所有的变量都为整数, 所以引入了向上取整符号, 这同时也提醒我们, 在\varible{O}\varible{Q}题板中, 非雷区域的边界格点的数目必为偶数, 换言之, 雷格点数目也受到限制.
     
-    为了便于理解, 我们在这里举一个例子: 使用上式计算可得: $2\times4$题板的最小雷数为$2$, 其分布仅有如图\ \ref{example}\ 上的三种情况(忽略对称的情况), 由于总格点数为奇数, 而边界格点数目为偶数, 所以雷格点数目为奇数且为1, 可直观地用图形验证(雷格点用红叉标出).
+    为了便于理解, 我们在这里举一个例子: 使用上式计算可得: $2\times4$题板的最小雷数为$2$, 其分布仅有如图\ \ref{example}\ 上的三种情况(仅经过旋转和反射变换可以互相转化的, 认为是同种情况, 下同), 由于总格点数为奇数, 而边界格点数目为偶数, 所以雷格点数目为奇数且为1, 可直观地用图形验证(雷格点用红叉标出).
 
     事实上,雷格点的分布就是OQ格点定理要讨论的内容.
 \end{enumerate}
@@ -208,6 +207,7 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
 接下来给出较为常用的一个结论:
 \begin{theorem}[OQ格点第一定理]
     对于总雷数为$R$的$m\times n\ $\varible{O}\varible{Q}题板, 雷格点数$M = 2R - (m-1)(n-1)$.
+    \label{OQ1}
 \end{theorem}
 \begin{proof}
     由式\ \ref{basic equation}\ 可知, 
@@ -233,7 +233,7 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
 \subsection{OQ格点定理的推论}
 在实际游玩过程中, 还有一些情况, 仅仅使用OQ格点第一定理仍然难以得出结论, 这时我们可以使用OQ格点定理的增强形式. 不过, 这一推论的证明更加复杂, 所以我们仍先从一个例子开始慢慢讲解.
 
-我们仍然从$2\times4$题板开始, 当$R = 2$时, 如前, 雷格点数为1. 让我们进一步观察雷格点的分布, 可以发现, 即使考虑到对称的所有情况, 雷格点的位置也只可能出现在如图\ \ref{example2}\ 所示的六个位置之一(用黄叉标记).
+我们仍然从$2\times4$题板开始, 当$R = 2$时, 如前, 雷格点数为1. 让我们进一步观察雷格点的分布, 可以发现, 雷格点的位置只可能出现在如图\ \ref{example2}\ 所示的六个位置之一(用黄叉标记).
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}
@@ -250,7 +250,7 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
     \label{example2}
 \end{figure}
 
-再看$R = 3$的情况, 这时雷格点数为3, 在不计对称性的意义下, 共有4种情况, 如图\ \ref{example3}\ 所示.
+再看$R = 3$的情况, 这时雷格点数为3, 共有4种情况, 如图\ \ref{example3}\ 所示.
 \begin{figure}[ht]
     \begin{tikzpicture}
         \begin{fmv}{2}{4}
@@ -314,14 +314,142 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
 \end{itemize}
 
 \section{其他规则下的格点定理}
-\todo{此部分将在本文章以后的版本补充.}
+\todo{此部分需要完善.}
+
+\begin{flushleft}
+    \textbf{注意}: \emph{本节旨在讨论其他规则下具有类似思路的格点定理, 并非正文部分, 因此可能会舍弃部分严谨性. 另外, 本节讨论的范围包含非原版游戏内容.}
+\end{flushleft}
+
+在讨论其他规则的格点定理之前, 我们先来回顾一下OQ格点定理的证明过程, 我们可以发现 Pick 定理在证明中起到了核心作用, 但是为什么这个普遍成立的定理在除了\varible{O}\varible{Q}以外的题目中难以直接使用呢? 换言之, \varible{O}\varible{Q} 有什么特殊性呢? 读者可以停下来思考一下这个问题, 我会在不久后给出我的理解.
+
+
+在此之前, 让我们先为接下来的讨论做一些准备工作. 为了使格点定理能够适用于更普遍的场景, 我们需要对格点种类进行更细致的划分, 具体而言, 将格点按其处在题板的位置和其周围格子的状态分为7类\footnote{我知道从2到7是一个巨大的跨越, 但是不要感到恐慌, 你马上就会感受到这是自然而且必要的.}.
+分类方式如下所述.
+
+首先根据格点处在题板的位置, 将格点分为\textbf{内部格点}和\textbf{边角格点}. 其中边角格点是指位于题板边界的格点, 其周围有1或2个格子; 内部格点是指不位于题板边界的格点, 其周围有4个格子.
+
+然后, 根据格点周围格子的状态, 将格点分为\textbf{雷格点}, \textbf{边界格点}, \textbf{数字格点}和\textbf{扭断格点}, 其中:
+\begin{itemize}
+    \item \textbf{雷格点}: 格点周围的全部格子均为雷的格点;
+    \item \textbf{数字格点}: 格点周围的全部格子均为非雷的格点;
+    \item \textbf{扭断格点}: 格点周围的4个格子为``扭断''结构, 即
+        \begin{tikzpicture}
+            \begin{fmv}[
+                tmargin = 1pt,
+                lmargin = 1pt,
+                rmargin = 1pt,
+                bmargin = 1pt,
+                scale = 1]{2}{2}
+            ? & f \\
+            f & ?
+            \end{fmv}
+        \end{tikzpicture}
+        或
+        \begin{tikzpicture}
+            \begin{fmv}[
+                tmargin = 1pt,
+                lmargin = 1pt,
+                rmargin = 1pt,
+                bmargin = 1pt,
+                scale = 1]{2}{2}
+            f & ? \\
+            ? & f
+            \end{fmv}
+        \end{tikzpicture}
+        的格点;
+    \item \textbf{边界格点}: 格点周围的中, 既有雷也有非雷, 但不为扭断结构的格点.
+\end{itemize}
+综合这两种分类方法, 即得到共7种格点类型, 如表\ \ref{gridpoint types}\ 所示, 注意一些在前文中使用过的记号意义有所改变.
+\begin{table}
+    \caption{格点的分类和其对应记号}
+    \label{gridpoint types}
+    $$
+    \text{格点}
+    \begin{cases}
+        \text{内部格点}
+        \begin{cases}
+            \text{内部雷格点}\ &N\\
+            \text{内部边界格点}\ &B\\
+            \text{内部数字格点}\ &N\\
+            \text{扭断格点}\ &X
+        \end{cases}\\
+        \text{边角格点}
+        \begin{cases}
+            \text{边角雷格点}\ &M'\\
+            \text{边角边界格点}\ &B'\\
+            \text{边角数字格点}\ &N'
+        \end{cases}
+    \end{cases}
+    $$
+\end{table}
+
+有了这么多种格点种类, 我们可以很快给出几个重要恒等式: 对于一个$m\times n$的题板, 其总格点数为$(m+1)(n+1)$, 则有:
+\begin{equation}
+    \label{total grid points}
+    (m+1)(n+1) = M + B + N + X +M' + B' + N'.
+\end{equation}
+这是显然的, 格点总数等于各类格点数之和.
+另外, 如果只考虑内部格点, 则有:
+\begin{equation}
+    \label{internal grid points}
+    (m-1)(n-1) = N + B + N + X.
+\end{equation}
+两式相减, 即得边界格点对应的等式:
+\begin{equation}
+    \label{boundary grid points}
+    2(m+n) = B' + M' + N'.
+\end{equation}
+
+现在, 我们终于可以在格点的视角下重新审视\varible{O}\varible{Q}规则了. \varible{O} 和\varible{Q} 同属于左线规则, 要求雷和非雷的分布满足一定的条件. 规则\varible{O}保证了非雷区域只有一个, 且不存在扭断, 这给我们使用 Pick定理提供了可能, 得以将格数和格点数联系起来. 而\varible{Q} 规则则保证了非雷区域不存在内部格点, 也就是\textbf{内部数字格点} 为0, 记作$N = 0$. 因此我们可以对非雷区域应用 Pick定理, 得到:
+\begin{equation}
+    \label{pick in OQ}
+    mn - R = \frac{B + B' + N'}{2} - 1.
+\end{equation}
+因此\varible{O}\varible{Q}在格点视角下可总结为:
+$$
+\begin{cases}
+    N = 0\\
+    B + B' + N' = 2(mn - R + 1)\\
+    X = 0
+\end{cases}
+$$
+代入式\ \ref{total grid points}\ 即可得到.
+$$
+(m+1)(n+1) = M + 2(mn - R + 1) + M'.
+$$
+即
+$$
+M + M' = 2R - (m-1)(n-1).
+$$
+这就是\ \hyperref[OQ1]{OQ格点第一定理}.(再次提醒, 这里的$M$和$M'$与前文中使用的记号意义不同.)
+
+% 要使用类似的思路讨论其他规则的格点定理, 这些规则也需要能够确定 Pick定理中的变量. 在《14种扫雷变体》和《14种扫雷变体2》中, 这样的规则有:
+% \begin{itemize}
+%     \item \varible{Q}
+%     \item \varible{O}
+%     \item \varible{D}
+%     \item \varible{S}
+%     \item \varible{D'}
+%     \item \varible{H}
+%     \item \varible{U}
+%     \item \varible{2G}
+%     \item \varible{2F}
+%     \item \varible{2G'}
+% \end{itemize}
+
+
+
+\pagebreak
 
 \section{致谢与感言}
+
+\subsection{第一版感言}
+
 这是本人第一次制作游戏攻略, 也应该是第一篇基于\LaTeX 写成的《14种扫雷变体》文档. 
 
 在被《14种扫雷变体》的玩法和\LaTeX 出色的排版效果吸引后, 在今年年初, 我就产生了使用\LaTeX 创作《14种扫雷变体》相关攻略的想法. 为了满足在攻略中绘图的需要, 我制作了基于Ti\emph{k}Z的宏包Ti\emph{k}Z-14mv, 本文的所有图片都是使用以上两个宏包绘制的. 同时, 这应该是Ti\emph{k}Z-14mv第一次被使用在实际的攻略中.
 
-此前, OQ格点定理常常在群里被提到, 但当时我并不了解其具体内容. 直到实际游玩\varible{O} \varible{Q}题板时, 有感其趣味性和OQ格点定理中蕴含的数学思维, 于是我顺理成章地决定将其写成攻略, 以便于更多的玩家了解. 我本计划写一个系统的\varible{O}\varible{Q}攻略, 并将本文作为其中的一部分. 但考虑到本人的水平有限, 恐怕无法撑起一篇完整的攻略, 因此仅仅写了OQ格点定理的部分.
+此前, OQ格点定理常常在群里被提到, 但当时我并不了解其具体内容. 直到实际游玩\varible{O}\varible{Q}题板时, 有感其趣味性和OQ格点定理中蕴含的数学思维, 于是我顺理成章地决定将其写成攻略, 以便于更多的玩家了解. 我本计划写一个系统的\varible{O}\varible{Q}攻略, 并将本文作为其中的一部分. 但考虑到本人的水平有限, 恐怕无法撑起一篇完整的攻略, 因此仅仅写了OQ格点定理的部分.
 
 此外, 格点定理不仅在出现在\varible{O}\varible{Q}题板中, 在其他规则中也有相应的版本, 例如QS、DQ格点定理等. 这同时说明 其中蕴含的数学思维是相通的. 我也有计划在本文中简要说明其他规则下的格点定理, 不过目前我还没有具体涉足过它们. 希望在本文的未来版本中, 能够加入其他规则下的格点定理.
 
@@ -378,19 +506,7 @@ $$
     \end{align*}
     由此可知, 每个边界格点的度数均为2, 即边界不会自交, 即边界是一个简单多边形.
 \end{proof}
-这是一个\varible{O}题板的性质. 同样表明, \varible{O}题板中不含``扭断'', 即
-\begin{tikzpicture}
-    \begin{fmv}[
-        tmargin = 1pt,
-        lmargin = 1pt,
-        rmargin = 1pt,
-        bmargin = 1pt,
-        scale = 1]{2}{2}
-    ? & f \\
-    f & ?
-    \end{fmv}
-\end{tikzpicture},
-因为此结构中中心格点的度数为4.
+这是一个\varible{O}题板的性质. 同样表明, \varible{O}题板中不含``扭断'', 因为扭断结构中中心格点的度数为4.
 
 \subsection{\varible{O}\varible{Q}的下确界}
 \label{inf}
