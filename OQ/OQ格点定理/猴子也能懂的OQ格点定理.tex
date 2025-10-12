@@ -12,6 +12,7 @@
 \usepackage{booktabs}
 \usepackage{subfig}
 \usepackage{todonotes}
+\usepackage{xcolor}
 
 \newfontfamily{\mvfont}{CopperplateCC-Heavy.otf}
 \newfontfamily{\Noto}{NotoSans-SemiBold.ttf}
@@ -20,7 +21,7 @@
     colorlinks = true,
 }
 \pagestyle{plain}
-\title{猴子也能懂的OQ格点定理}
+\title{猴子也能懂的OQ格点定理\ v2.0}
 \author{中指君}
 \newcommand{\varible}[1]{{\Noto[#1]}}
 \newcommand{\variblep}[1]{{[#1]}}
@@ -206,7 +207,10 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
 
 接下来给出较为常用的一个结论:
 \begin{theorem}[OQ格点第一定理]
-    对于总雷数为$R$的$m\times n\ $\varible{O}\varible{Q}题板, 雷格点数$M = 2R - (m-1)(n-1)$.
+    对于总雷数为$R$的$m\times n\ $\varible{O}\varible{Q}题板, 雷格点数M满足:
+    \begin{equation}
+        M = 2R - (m-1)(n-1).
+    \end{equation}
     \label{OQ1}
 \end{theorem}
 \begin{proof}
@@ -314,24 +318,23 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
 \end{itemize}
 
 \section{其他规则下的格点定理}
-\todo{此部分需要完善.}
 
 \begin{flushleft}
-    \textbf{注意}: \emph{本节旨在讨论其他规则下具有类似思路的格点定理, 并非正文部分, 因此可能会舍弃部分严谨性. 另外, 本节讨论的范围包含非原版游戏内容.}
+    \textbf{注意}: \emph{本节旨在讨论其他规则下具有类似思路的格点定理, 并非正文部分, 因此可能会舍弃部分严谨性. 另外, 本节讨论的范围包含非原版游戏内容, 适合对游戏规则有一定了解的读者阅读.}
 \end{flushleft}
 
-在讨论其他规则的格点定理之前, 我们先来回顾一下OQ格点定理的证明过程, 我们可以发现 Pick 定理在证明中起到了核心作用, 但是为什么这个普遍成立的定理在除了\varible{O}\varible{Q}以外的题目中难以直接使用呢? 换言之, \varible{O}\varible{Q} 有什么特殊性呢? 读者可以停下来思考一下这个问题, 我会在不久后给出我的理解.
+在讨论其他规则的格点定理之前, 我们先来回顾一下OQ格点定理的证明过程, 很容易就能发现 Pick 定理在证明中起到了核心作用. 大家是否有这样的疑问: 为什么这个普遍成立的定理在除了\varible{O}\varible{Q}以外的题目中难以直接使用呢? 换言之, \varible{O}\varible{Q} 有什么特殊性呢? 现在可以停下来思考一下这个问题, 我会在本节稍后给出我的理解.
 
-
+\subsection{格点类型的扩充}
 在此之前, 让我们先为接下来的讨论做一些准备工作. 为了使格点定理能够适用于更普遍的场景, 我们需要对格点种类进行更细致的划分, 具体而言, 将格点按其处在题板的位置和其周围格子的状态分为7类\footnote{我知道从2到7是一个巨大的跨越, 但是不要感到恐慌, 你马上就会感受到这是自然而且必要的.}.
 分类方式如下所述.
 
-首先根据格点处在题板的位置, 将格点分为\textbf{内部格点}和\textbf{边角格点}. 其中边角格点是指位于题板边界的格点, 其周围有1或2个格子; 内部格点是指不位于题板边界的格点, 其周围有4个格子.
+首先根据格点处在题板的位置, 将格点分为\textbf{内部格点}和\textbf{边角格点}. 其中边角格点是指位于题板边界的格点, 其周围有1或2个格子; 内部格点是指不位于题板边界的格点, 其周围有4个格子. 用加一撇$(^\prime)$的大写字母表示边角格点, 不加撇的大写字母表示内部格点.
 
 然后, 根据格点周围格子的状态, 将格点分为\textbf{雷格点}, \textbf{边界格点}, \textbf{数字格点}和\textbf{扭断格点}, 其中:
 \begin{itemize}
-    \item \textbf{雷格点}: 格点周围的全部格子均为雷的格点;
-    \item \textbf{数字格点}: 格点周围的全部格子均为非雷的格点;
+    \item \textbf{雷格点}: 格点周围的全部格子均为雷的格点, 用$M$表示;
+    \item \textbf{数字格点}: 格点周围的全部格子均为非雷的格点, 用$N$表示;
     \item \textbf{扭断格点}: 格点周围的4个格子为``扭断''结构, 即
         \begin{tikzpicture}
             \begin{fmv}[
@@ -356,10 +359,10 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
             ? & f
             \end{fmv}
         \end{tikzpicture}
-        的格点;
-    \item \textbf{边界格点}: 格点周围的中, 既有雷也有非雷, 但不为扭断结构的格点.
+        的格点, 用$X$表示;
+    \item \textbf{边界格点}: 格点周围的中, 既有雷也有非雷, 但不为扭断结构的格点, 用$B$表示.
 \end{itemize}
-综合这两种分类方法, 即得到共7种格点类型, 如表\ \ref{gridpoint types}\ 所示, 注意一些在前文中使用过的记号意义有所改变.
+综合这两种分类方法, 即得到共7种格点类型, 为了方便以后的讨论, 我给他们分别赋予了字母记号. 如表\ \ref{gridpoint types}\ 所示, 需要注意其中的一些记号的意义相较前文已经有所改变.
 \begin{table}
     \caption{格点的分类和其对应记号}
     \label{gridpoint types}
@@ -368,7 +371,7 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
     \begin{cases}
         \text{内部格点}
         \begin{cases}
-            \text{内部雷格点}\ &N\\
+            \text{内部雷格点}\ &M\\
             \text{内部边界格点}\ &B\\
             \text{内部数字格点}\ &N\\
             \text{扭断格点}\ &X
@@ -394,13 +397,13 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
     \label{internal grid points}
     (m-1)(n-1) = N + B + N + X.
 \end{equation}
-两式相减, 即得边界格点对应的等式:
+两式相减, 即得边界格点对应的方程:
 \begin{equation}
     \label{boundary grid points}
     2(m+n) = B' + M' + N'.
 \end{equation}
 
-现在, 我们终于可以在格点的视角下重新审视\varible{O}\varible{Q}规则了. \varible{O} 和\varible{Q} 同属于左线规则, 要求雷和非雷的分布满足一定的条件. 规则\varible{O}保证了非雷区域只有一个, 且不存在扭断, 这给我们使用 Pick定理提供了可能, 得以将格数和格点数联系起来. 而\varible{Q} 规则则保证了非雷区域不存在内部格点, 也就是\textbf{内部数字格点} 为0, 记作$N = 0$. 因此我们可以对非雷区域应用 Pick定理, 得到:
+对格点类型进行扩充后, 我们终于可以在格点的视角下重新审视\varible{O}\varible{Q}规则了. \varible{O} 和\varible{Q} 同属于左线规则, 要求雷和非雷的分布满足一定的条件. 规则\varible{O}保证了非雷区域只有一个, 且不存在扭断, 这给我们使用 Pick定理提供了可能, 得以将格数和格点数联系起来. 而\varible{Q} 规则则保证了非雷区域不存在内部格点, 也就是\textbf{内部数字格点} 为0, 记作$N = 0$. 因此我们可以对非雷区域应用 Pick定理, 得到:
 \begin{equation}
     \label{pick in OQ}
     mn - R = \frac{B + B' + N'}{2} - 1.
@@ -408,40 +411,173 @@ OQ格点定理是在\varible{O}\varible{Q}规则下的一系列重要而常用�
 因此\varible{O}\varible{Q}在格点视角下可总结为:
 $$
 \begin{cases}
-    N = 0\\
-    B + B' + N' = 2(mn - R + 1)\\
-    X = 0
+    N = 0,\\
+    B + B' + N' = 2(mn - R + 1),\\
+    X = 0.
 \end{cases}
 $$
 代入式\ \ref{total grid points}\ 即可得到.
-$$
-(m+1)(n+1) = M + 2(mn - R + 1) + M'.
-$$
+\begin{equation}
+    (m+1)(n+1) = M + 2(mn - R + 1) + M'.
+\end{equation}
 即
-$$
-M + M' = 2R - (m-1)(n-1).
-$$
+\begin{equation}
+    M + M' = 2R - (m-1)(n-1).
+\end{equation}
 这就是\ \hyperref[OQ1]{OQ格点第一定理}.(再次提醒, 这里的$M$和$M'$与前文中使用的记号意义不同.)
 
-% 要使用类似的思路讨论其他规则的格点定理, 这些规则也需要能够确定 Pick定理中的变量. 在《14种扫雷变体》和《14种扫雷变体2》中, 这样的规则有:
-% \begin{itemize}
-%     \item \varible{Q}
-%     \item \varible{O}
-%     \item \varible{D}
-%     \item \varible{S}
-%     \item \varible{D'}
-%     \item \varible{H}
-%     \item \varible{U}
-%     \item \varible{2G}
-%     \item \varible{2F}
-%     \item \varible{2G'}
-% \end{itemize}
+实际上OQ格点定理之所以成立, 就是因为他给出了足够多的格点的数量特征, 足以让我们消去式\ \ref{total grid points}\ 中足够多的量, 使我们可以将目光着眼于少数几个量(在这里是雷格点数)满足的数量关系, 这同样也是格点定理的核心.
 
+\subsection{QS格点定理}
+
+其他规则也可以转化为其他的格点方程, 从而构成其他格点定理. 让我们先着眼于 QS格点定理.
+\begin{flushleft}
+    \varible{S} {\heiti 蛇: 所有雷构成一条蛇. 蛇是一条宽度为1的四联通路径, 不存在分叉、环、交叉.}
+\end{flushleft}
+显然在\varible{S}中不存在内部雷格点, 即$M = 0$; 另外, \varible{S} 中的雷区可能包含孔洞, 不能直接使用 Pick定理, 不过其满足类似的形式, 如下.
+\begin{theorem}[蛇面积方程]
+    蛇的面积可以由以下式子描述:
+    \begin{equation}
+        R = \frac{B + M' + B'}{2} + X - 1.
+    \end{equation}
+\end{theorem}
+此定理的证明见\ \ref{proof:snack-area}.
+因此\varible{S}对应的格点方程为
+$$
+\begin{cases}
+    M = 0,\\
+    B + 2X + M' + B' = 2R + 2.
+\end{cases}
+$$
+结合式\ \ref{total grid points}\ 可得
+$$
+N + N' - X = (m+1)(n+1) - 2R - 2.
+$$
+如果你愿意, 可以把上式叫做S格点定理, 但是显然这个定理不太实用, 因为$N$这个量在实际游玩中很难确定.
+不过如果加上规则\varible{Q}, 也就是$N = 0$, 事情就好办多了, 这时:
+\begin{equation}
+    \label{QS1}
+    N' - X= (m+1)(n+1) - 2R - 2.
+\end{equation}
+不过这个式子仍然不够实用, 因为在实际题板中 $N'$ 的数值较大, 可以用式\ \ref{boundary grid points}\ 消去$N'$, 得到:
+\begin{theorem}[QS格点定理]
+    对于\varible{Q}\varible{S}题板, 有
+    \begin{equation}
+       X + B' + M' =2R + 2 - (m-1)(n-1).
+    \end{equation}
+\end{theorem}
+实际游玩中
+$$
+X + B' + M' = \begin{cases}
+    6, \ \text{对于}\ 5\times5\ \text{和}\ 7\times7\ \text{题板},\\
+    5, \ \text{对于}\ 6\times6\ \text{和}\ 8\times8\ \text{题板}.
+\end{cases}
+$$
+观察式\ \ref{QS1}\ 我们可以发现, 这几乎就是OQ格点定理的反面, 仅仅就是引入了一个在\varible{S} 中存在的扭断, 然后把所谓的雷格点换成了数字格点而已. 这是很自然的, 因为\varible{O}的性质和\varible{S}十分相似, 它们对应的格点方程的结构也是类似的.
+
+\subsection{更多的格点定理}
+在明白了上文的思路之后, 我们可以批量``生产''出其他组合的格点定理, 试将其他左线规则的格点方程列如下:
+
+\begin{itemize}
+    \item \varible{O}{\heiti 外部: 非雷区域四方向联通, 雷区域与题板外部四方向联通.}
+        $$
+        \begin{cases}
+            B + B' + N' = 2(mn - R + 1),\\
+            X = 0.
+        \end{cases}
+        $$
+    \item \varible{Q}{\heiti 无方: 每个$2\times2$区域内都至少有一个雷.}
+        $$
+        N = 0
+        $$
+    \item \varible{D}{\heiti 雷均由$1\times2$或$2\times1$的矩形组成.}
+    
+    单独看每个矩形对应6个格点, 矩形的角邻接时产生扭断, 因此雷周边总格点数为$6R/2$(扭断应算两次).
+        $$
+        \begin{cases}
+            M = 0,\\
+            3R = 2X + B + B' + M'
+        \end{cases}
+        $$
+    \item \varible{S} {\heiti 蛇: 所有雷构成一条蛇. 蛇是一条宽度为1的四联通路径, 不存在分叉、环、交叉.}
+        $$
+        \begin{cases}
+            M = 0,\\
+            B + 2X + M' + B' = 2R + 2.
+        \end{cases}
+        $$
+    \item \varible{D'} {\heiti 战舰: 每个雷区域为宽度为1、长度不超过4的矩形, 矩形不能对角相邻}
+    
+    对于每个矩形, 4个格点位于角上, 边上的格点数目为$[2(\text{矩形尺寸}-1)]$, 对所有矩形求和, 共有$(4\times\text{矩形数目})$个角, $[2(R-\text{矩形数目}-1)]$个边, 因此格点方程为:
+            $$
+            \begin{cases}
+                M = 0,\\
+                X = 0,\\
+                B' + B + M' = 2R + 2\times\text{矩形数目}.
+            \end{cases}
+            $$
+    如果我们愿意将内部边界格点进一步细分的话, 我们就可以更好区分出每个矩形角上的格点和边上的格点, 以写出更加详细的方程.
+    \item \varible{H} {\heiti 横向: 所有雷不与其他雷横向相邻.}
+        $$
+        M = 0
+        $$
+    \item \varible{U} {\heiti 一元: 所有雷不与其他雷相邻}
+    类似于\varible{D}
+        $$
+        \begin{cases}
+            M = 0,\\
+            4R = 2X + B + B' + M'.
+        \end{cases}
+        $$
+        以上两个规则限制性很强, 可以断定其构成的格点定理有效性不强.
+    \item \varible{2G} {\heiti 四连块: 所有四联通雷区的面积为4}
+        对单个四连块
+        $$
+        4 = \frac{B + B' + M'}{2} + M - 1.
+        $$
+        考虑所有四连块时, 扭断应算两次. 因此有:
+        $$
+        B + B' + M' + 2X + 2M = \frac{5}{2}R 
+        $$
+        其中$M$的数量较小
+    % \item \varible{2F} {\heiti 花田: 染色格中的雷周围4格内恰好有1个雷(默认使用棋盘格染色法)}
+    \item \varible{2G'} {\heiti 三连块: 所有四联通雷区的面积为3}
+    类似地
+    $$
+    \begin{cases}
+        M = 0,\\
+        B + B' + M' + 2X = \dfrac{8}{3}R
+    \end{cases}
+    $$
+\end{itemize}
+
+列出了这么多式子, 很容易发现, 仅有\varible{Q}一个规则涉及到了对$B$的限制, 这足以说明\varible{Q} 在格点定理中的核心地位. 我们几乎可以说, 有了\varible{Q}才有了各式各样的格点定理! 现在, 写出属于你的格点定理吧!
+
+最后, 我们曾经对 OQ格点定理中格点的奇偶性进行了讨论, 实际上其他的格点定理, 也可以将其推广到带奇偶性的情况.
+对于\varible{S}, 我们可以继续沿用之前的思路. 但是如果考虑那些存在多个区域的规则时, 就需要做出一点改变, 不过这并不是一件难事. 这部分内容就留给感兴趣的读者自行进行吧.
 
 
 \pagebreak
 
 \section{致谢与感言}
+\subsection{第二版感言}
+本人在今年五一完成了本文的第一版, 留下了会介绍其他规则下的格点定理的大饼, 然后本文就被彻底搁置了. 然而群友Jsky单推人在前几天突然来加我好友, 询问我格点定理的进度, 这时我才知道我之前一时兴起写的这篇文章竟然还被人关注着. 这之后我很快投身了对此的研究, 最终将成果整理成本文的第三部分.
+
+尽管最近玩扫雷的时间和频率都明显减小, 但是当我重新拾起这项工作时, 我仍然感到兴奋和享受, 并且投入了很大的热情. 正因如此我仅用了一个周末的时间就完成了大部分的理论研究和写作.
+
+要特别感谢Js老师, 没有他的催更, 这篇文章不知道什么时候才会得到更新; 没有他的催更, 我将也没有机会进行如此令人兴奋的研究! {\footnotesize \color[rgb]{.7,.7,.7} 所以Js老师稿费结一下.}
+
+此外, 到目前为止, 本文还有诸多不完善之处, 感谢大伙的批评指正!
+
+\vspace{\stretch{2}}
+\begin{flushright}
+    中指君
+
+    写于2025年10月12日
+\end{flushright}
+
+\vspace{\stretch{1}}
+\pagebreak
 
 \subsection{第一版感言}
 
@@ -508,7 +644,7 @@ $$
 \end{proof}
 这是一个\varible{O}题板的性质. 同样表明, \varible{O}题板中不含``扭断'', 因为扭断结构中中心格点的度数为4.
 
-\subsection{\varible{O}\varible{Q}的下确界}
+\subsection{\varible{O}\varible{Q} 题板雷数的下确界}
 \label{inf}
 此前证明了$R$的下界为$\left\lceil \frac{(m-1)(n-1)}{2} \right\rceil$, 要证明其同时为下确界,只需给出一种满足要求的构造方式即可. 如下的构造由群友灵秀之韵给出:
 \begin{itemize}
@@ -552,4 +688,7 @@ $$
     }
 \end{figure}
 
+\subsection{蛇面积方程的证明}
+\label{proof:snack-area}
+\todo{这个我不会证!}
 \end{document}

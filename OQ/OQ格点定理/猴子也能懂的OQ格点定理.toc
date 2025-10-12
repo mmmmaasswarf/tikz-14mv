@@ -5,7 +5,13 @@
 \contentsline {subsection}{\numberline {2.3}OQ格点定理的一般形式}{4}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}OQ格点定理的推论}{5}{subsection.2.4}%
 \contentsline {section}{\numberline {3}其他规则下的格点定理}{7}{section.3}%
-\contentsline {section}{\numberline {4}致谢与感言}{7}{section.4}%
-\contentsline {section}{\numberline {A}补充材料}{8}{appendix.A}%
-\contentsline {subsection}{\numberline {A.1}{\Noto [O]}{\Noto [Q]}规则下非雷区域的边界为简单多边形}{8}{subsection.A.1}%
-\contentsline {subsection}{\numberline {A.2}{\Noto [O]}{\Noto [Q]}的下确界}{9}{subsection.A.2}%
+\contentsline {subsection}{\numberline {3.1}格点类型的扩充}{7}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}QS格点定理}{9}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}更多的格点定理}{10}{subsection.3.3}%
+\contentsline {section}{\numberline {4}致谢与感言}{13}{section.4}%
+\contentsline {subsection}{\numberline {4.1}第二版感言}{13}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}第一版感言}{14}{subsection.4.2}%
+\contentsline {section}{\numberline {A}补充材料}{15}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}{\Noto [O]}{\Noto [Q]}规则下非雷区域的边界为简单多边形}{15}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}{\Noto [O]}{\Noto [Q]} 题板雷数的下确界}{16}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}蛇面积方程的证明}{16}{subsection.A.3}%
