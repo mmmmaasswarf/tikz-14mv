@@ -1,0 +1,18 @@
+% ls-R -- filename database for kpathsea; do not change this line.
+
+./:
+ls-R
+tex
+
+./tex:
+latex
+
+./tex/latex:
+tikz-14mv.aux
+tikz-14mv.log
+tikz-14mv.out
+tikz-14mv.pdf
+tikz-14mv.sty
+tikz-14mv.synctex.gz
+tikz-14mv.tex
+tikz-14mv.toc
